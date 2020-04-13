@@ -12,6 +12,9 @@
 
 <script>
 export default {
+  created() {
+    console.log(this.$route.query)
+  },
   methods: {
     goNews1() {
       this.$router.push('/news')

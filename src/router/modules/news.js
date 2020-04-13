@@ -2,7 +2,7 @@
 
 const NewsRoute = {
   path: "/news",
-  name: "News",
+  // name: "News",
   component: () => import("@/views/news/index.vue"),
   children: [
     {
@@ -15,6 +15,5 @@ const NewsRoute = {
     }
   ]
 }
-
 
 export default NewsRoute

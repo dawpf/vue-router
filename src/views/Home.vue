@@ -16,7 +16,12 @@ export default {
   methods: {
     goNews() {
       // 跳转到news页面
-      this.$router.push('/news')
+      this.$router.push({
+        path: '/news',
+        query: {
+          id: 111111
+        }
+      })
     }
   }
 }

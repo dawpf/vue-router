@@ -12,7 +12,16 @@ const routes = [
     name: "Home",
     component: () => import("@/views/Home.vue")
   },
-  News, User
+  {
+    path: "/404",
+    name: "NotFound",
+    component: () => import("@/404.vue")
+  },
+  News, User,
+  {
+    path: '*',
+    redirect: '/404'
+  }
 ];
 
 const router = new VueRouter({
