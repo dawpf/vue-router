@@ -119,70 +119,41 @@ home 页面跳转到 news页面：
 
 或者使用 this.$router.push( { name:'路由配置的name' , params:{id:123} } ) 这种形式来进行传递参数
 
-```html
-<template>
-  <div class="home">
-    <h1>home页面</h1>
-    <div>
-      <button class="bd0" @click="goNews">news</button>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'Home',
-  components: {},
-  methods: {
-    goNews() {
-      // 跳转到news页面
-      this.$router.push({
-        path: '/news',
-        query: {
-          id: 123
-        }
-      })
-    }
-  }
-}
-</script>
-```
-
-news 页面：
-
-news 页面使用 this.$route.query 或 this.$route.params 来接收上一个页面传递下来的参数
-
-```html
-<template>
-  <div>
-    <h1>news页面</h1>
-
-    <div class="flex">
-      <button class="bd0" @click="goNews1">news1</button>
-      <button class="bd0 ml15" @click="goNews2">news2</button>
-    </div>
-		
-    // 用来存放嵌套路由，如：点击 news2 按钮，此处就会显示 news2 组件的内容
-    <router-view></router-view>   
-  </div>
-</template>
-
-<script>
-export default {
-  created() {
-    console.log(this.$route.query)  // 打印出来为 { id:123 }
-  },
-  methods: {
-    goNews1() {
-      // 因为 news1 是news模块展示的时候默认显示的内容，所以跳转到 news 页面即可
-      // 可以设置 news1 不是默认，path:"news1" 则 this.$router.push('/news1')
-      this.$router.push('/news')
-    },
-    goNews2() {
-      this.$router.push('/news/news2')
-    }
-  }
-}
-</script>
+```javascript
+1.  不带参数
+ 
+this.$router.push('/home')
+this.$router.push({name:'home'})
+this.$router.push({path:'/home'})
+ 
+ 
+ 
+2. query传参 
+ 
+this.$router.push({name:'home',query: {id:'1'}})
+this.$router.push({path:'/home',query: {id:'1'}})
+ 
+// html 取参  $route.query.id
+// script 取参  this.$route.query.id
+ 
+ 
+ 
+3. params传参
+ 
+this.$router.push({name:'home',params: {id:'1'}})  // 只能用 name
+ 
+// 路由配置 path: "/home/:id" 或者 path: "/home:id" ,
+// 不配置path ,第一次可请求,刷新页面id会消失
+// 配置path,刷新页面id会保留
+ 
+// html 取参  $route.params.id
+// script 取参  this.$route.params.id
+ 
+ 
+ 
+4. query和params区别
+query类似 get, 跳转之后页面 url后面会拼接参数,类似?id=1, 非重要性的可以这样传, 密码之类还是用params刷新页面id还在
+ 
+params类似 post, 跳转之后页面 url后面不会拼接参数 , 但是刷新页面id 会消失
 ```
 
